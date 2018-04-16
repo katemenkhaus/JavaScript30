@@ -21,6 +21,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: salmon; 
+      --blur: 5px; 
+      --spacing: 20px;
+    }
+    
+    img {
+      background-color: var(--base);
+      filter: blur(var(--blur));
+      padding: var(--spacing);
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -42,9 +57,21 @@
     input {
       width:100px;
     }
+
+    
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+    const image = document.querySelector('img');
+
+    function handleUpdate(){
+      const suffix = this.dataset.sizing || '' ; 
+      // debugger
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
   </script>
 
 </body>
